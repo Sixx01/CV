@@ -1,7 +1,7 @@
 body 
 {
 	padding-left: 1em;
-    padding-right: 20em;
+    padding-right: 1em;
 	font-family:Calibri;
     font-size: 18px;
     color: #000000; 
@@ -52,7 +52,8 @@ h3
 {
     border: 2px outset #96c4d6;
     background-color: #d3e9f2;
-    padding-left: 15px;    
+    padding-left: 15px;   
+    padding-right: 15px;    
     
 }
 
@@ -67,6 +68,17 @@ a:visited
     color: purple;
 }
 
+td {
+    
+    line-height: 20px;
+    padding: 0 20px;
+    vertical-align: top;
+    width: 50%;
+}
+
+td.first {
+    border-right: 5px solid #4BB495;
+}
 
 
 progress::-moz-progress-bar
