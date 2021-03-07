@@ -1,0 +1,102 @@
+body 
+{
+	padding-left: 1em;
+    padding-right: 20em;
+	font-family:Calibri;
+    font-size: 18px;
+    color: #000000;
+    background-color: white;
+    text-align: justify;
+}
+
+p.a 
+{
+    font-family:Calibri;
+    font-size: 18px;
+    color: #000000;
+    font-style: italic;
+}
+
+hr.divide1
+{
+    border: 3px solid #267196;
+}
+
+hr.divide2 
+{
+    border-top: 1px dashed blue;
+}
+
+h1 
+{
+    font-family: Arial;
+    font-size: 30px;
+    Color: #050505;
+}
+
+h2 
+{
+    font-family: Arial;
+    font-size: 25px;
+    Color: #333333;
+}
+
+h3 
+{
+    font-family: Arial;
+    font-size: 20px;
+    Color: #575757;
+}
+
+.pro
+{
+    border: 2px outset #96c4d6;
+    background-color: #d3e9f2;
+    padding-left: 15px;    
+    
+}
+
+
+a:link 
+{
+    color: blue;
+}
+
+a:visited 
+{
+    color: purple;
+}
+
+
+
+progress::-moz-progress-bar
+{ 
+    background-color: #267196;
+} 
+
+.progress-bar 
+{
+  background-color: #1a1a1a;
+  height: 15px;
+  width: 450px;
+  margin: 50px auto;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+}
+
+.stripes 
+{
+  background-size: 30px 30px;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-inner {
+  display: block;
+  height: 15px;
+  width: 0%;
+  background-color: #34c2e3;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  position: relative;
+  animation: auto-progress 10s infinite linear;
+}
