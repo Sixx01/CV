@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html><div style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;" id="twoseven-scripts" data-info="Scripts added by TwoSeven extension"><script type="text/javascript" id="__tmpScript-542753618" data-added-by-two-seven="1">(function() {
+    window.twoseven = {};
+  })();</script><script type="text/javascript" id="__tmpScript-638165936" data-added-by-two-seven="1">(function() {
+    window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+  })();</script><script type="text/javascript" id="__tmpScript-503377658" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.reportError = function reportError(e,t,n){"string"==typeof(n=n||{})&&(n={message:n});const{message:o,stack:s}=t;Object.assign(n,{tag:e,error:{message:o,stack:s}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-965969395" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-602400717" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+  })();</script><script type="text/javascript" id="__tmpScript-725453293" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-590545522" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-309260047" data-added-by-two-seven="1">(function() {
+    window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+  })();</script><script type="text/javascript" id="__tmpScript-326898613" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+  })();</script><script type="text/javascript" id="__tmpScript-314356225" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+  })();</script><script type="text/javascript" id="__tmpScript-646953950" data-added-by-two-seven="1">(function() {
+    window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+  })();</script><script type="text/javascript" id="__tmpScript-112075741" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-621944504" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-27145054" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+  window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-758041976" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-85175778" data-added-by-two-seven="1">(function() {
+    window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+  })();</script><script type="text/javascript" id="__tmpScript-299885967" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-473897951" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isPaused = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-374280738" data-added-by-two-seven="1">(function() {
+    
+      const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+      const modalCloseBtn = modal.querySelector('.close')
+      function closeModal () {
+        modal.style.display = 'none'
+        const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+        frame.postMessage({
+          __evt_name: 'modal-hide'
+        }, '*')
+      }
+      modalCloseBtn.onclick = closeModal
+
+      window.onmessage = function (e) {
+        if (e.data.__evt_name === 'modal-hide') {
+          closeModal()
+        }
+      }
+
+      window.twoseven.closeTabMediaModal = closeModal
+
+      window.onclick = function (e) {
+        if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+            closeModal()
+        }
+      }
+    ;
+  })();</script></div><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Curriculum Vitae</title>
+
+<link rel="stylesheet" media="all" href="Curriculum%20Vitae%20Archivos/CV.css">
+
+
+<link href="Curriculum%20Vitae%20Archivos/modal.css" rel="stylesheet" id="__tmpStyle"><style>._1Jn4w--dark-theme ._2W_Mi--ff-downloader{background:rgba(30,30,30,.93);border:1px solid rgba(82,82,82,.54);box-shadow:0 4px 7px rgba(30,30,30,.55);color:#fff}._1Jn4w--dark-theme ._2W_Mi--ff-downloader ._1j0oW--header .-gqTk--minimize-btn{background:#3d4b52}._1Jn4w--dark-theme ._2W_Mi--ff-downloader ._1j0oW--header .-gqTk--minimize-btn:hover{background:#131415}._1Jn4w--dark-theme ._2W_Mi--ff-downloader .NP74F--footer{background:rgba(30,30,30,.93)}._2T9m1--white-theme ._2W_Mi--ff-downloader ._1j0oW--header{font-weight:700}._2T9m1--white-theme ._2W_Mi--ff-downloader{background:#fff;border:1px solid rgba(82,82,82,.54);box-shadow:0 4px 7px rgba(30,30,30,.55);color:#314c75}._2T9m1--white-theme ._2W_Mi--ff-downloader .ENZl_--container ._1NyI0--notice{border:0;color:rgba(0,0,0,.88)}._2T9m1--white-theme ._2W_Mi--ff-downloader .NP74F--footer{background:#fff}._2W_Mi--ff-downloader{display:block;overflow:hidden;position:fixed;bottom:20px;right:7.1%;width:330px;height:180px;background:rgba(30,30,30,.93);border-radius:2px;color:#fff;z-index:99999999;border:1px solid rgba(82,82,82,.54);box-shadow:0 4px 7px rgba(30,30,30,.55);transition:.5s}._2W_Mi--ff-downloader.IR79V--minimize{height:62px}._2W_Mi--ff-downloader.IR79V--minimize ._23-rh--file-info,._2W_Mi--ff-downloader.IR79V--minimize ._1j0oW--header{display:none}._2W_Mi--ff-downloader ._1j0oW--header{padding:10px;font-size:17px;font-family:sans-serif}._2W_Mi--ff-downloader ._1j0oW--header .-gqTk--minimize-btn{float:right;background:#f1ecec;height:20px;width:20px;text-align:center;padding:2px;margin-top:-10px;cursor:pointer}._2W_Mi--ff-downloader ._1j0oW--header .-gqTk--minimize-btn:hover{background:#e2dede}._2W_Mi--ff-downloader ._2pzks--error{color:red;padding:10px;font-size:12px;line-height:19px}._2W_Mi--ff-downloader .ENZl_--container{position:relative;height:100%}._2W_Mi--ff-downloader .ENZl_--container ._23-rh--file-info{padding:6px 15px 0;font-family:sans-serif}._2W_Mi--ff-downloader .ENZl_--container ._23-rh--file-info div{margin-bottom:5px;width:100%;overflow:hidden}._2W_Mi--ff-downloader .ENZl_--container ._1NyI0--notice{margin-top:21px;font-size:11px}._2W_Mi--ff-downloader .NP74F--footer{width:100%;bottom:0;position:absolute;font-weight:700}._2W_Mi--ff-downloader .NP74F--footer ._24iHU--loader{animation:_1I3Du--rotation 3.5s linear forwards;position:absolute;top:-120px;left:calc(50% - 35px);border-radius:50%;border:5px solid #fff;border-top-color:#a29bfe;height:70px;width:70px;display:flex;justify-content:center;align-items:center}._2W_Mi--ff-downloader .NP74F--footer ._3G9l3--loading-bar{width:100%;height:18px;background:#dfe6e9;border-radius:5px}._2W_Mi--ff-downloader .NP74F--footer ._3G9l3--loading-bar .oIJ7L--progress-bar{height:100%;background:#8bc34a;border-radius:5px}._2W_Mi--ff-downloader .NP74F--footer ._2sstt--status{margin-top:10px}._2W_Mi--ff-downloader .NP74F--footer ._2sstt--status ._2n528--state{float:left;font-size:.9em;letter-spacing:1pt;text-transform:uppercase;width:100px;height:20px;position:relative}._2W_Mi--ff-downloader .NP74F--footer ._2sstt--status .l8Hmj--percentage{float:right}</style></head>
+
+<body>
+
+<!-- Contenido principal -->
+<div style="float: left; width: 45%">
+
+<div class="pro">
+
+<h1>Carlos Salvador Arias Sánchez</h1>
+
+<p> ---Student in Bachelor of Computer Engineering---
+
+<br>
+<br>
+
+<img src="Curriculum%20Vitae%20Archivos/Carlos.png" alt="Carlos Salvador Arias Sanchez" style="width:349px;height:423px;">
+
+</p><p>
+
+January 24th, 1996 
+
+<br>
+<br>
+
+3311777168
+
+<br>
+<br>
+
+Guadalajara, Jalisco
+
+<br>
+<br>
+
+carlos.arias01@hotmail.com
+
+<br>
+<br>
+
+<a href="https://www.linkedin.com/in/carlos-arias-01/">Linkedin</a>
+
+<br>
+<br>
+
+<a href="https://www.artstation.com/sixx01">Artstation</a>	
+
+<br>
+<br>
+
+<a href="https://globalgamejam.org/users/sixx">Global Game Jam</a>
+
+<br>
+<br>
+
+</p></div>
+
+<hr class="divide1">
+
+<p></p>
+
+
+<h2>Aptitudes</h2>
+
+<p> 
+
+Proactive, loyal, tolerant, easy to speak, analytical, easy to make 
+decisions, neat, organized, respectful, innovative, creative, honest.
+
+</p>
+
+<hr class="divide1">
+
+
+
+<h2>Languages</h2>
+
+<p> English...........................<progress value="90" max="100">
+
+</progress></p><p> German.........................<progress value="15" max="100">
+
+</progress></p><p> Spanish..........................<progress value="100" max="100">
+
+
+
+
+</progress></p><hr class="divide1">
+
+<h2>Interests</h2>
+
+
+<p>
+
+- Videogames
+
+<br>
+<br>	
+
+- Computing
+
+<br>
+<br>
+
+- Languages
+
+<br>
+<br>
+
+- Hardware Redress
+
+</p>
+
+<hr class="divide1">
+
+
+
+<h2>Personal references</h2>
+
+<p>
+
+Monica Berenice Rojas Uribe
+
+<br>
+<br>
+
+Food and Biotechnology Engineer
+
+<br>
+<br>
+
+Gigantes, ****, Colonia ******
+
+<br>
+<br>
+
+3333333333
+
+<br>
+<br>
+
+monica.rojas@gmail.com
+
+</p>
+
+
+<hr class="divide2">
+
+<p>
+
+Javier Evipzay Perez Ortega
+
+<br>
+<br>
+
+Bachelor of Gastronomy Business Administration
+
+<br>
+<br>
+
+Rio Nilo, ****, Colonia ******
+
+<br>
+<br>
+
+3333333333
+
+<br>
+<br>
+
+javier.ortega@gmail.com
+
+</p>
+
+</div>
+
+
+
+
+
+<div style="float: right; width: 45%">
+
+<h2>Profile</h2>
+
+<p>
+
+I seek to work in the area of video game development and the like to 
+improve my learning and work skills, in addition to contributing and 
+expanding my acquired knowledge, being part of a work team in  which I 
+can gain experience and support in improving activities within the 
+company.
+
+</p>
+
+<hr class="divide1">
+
+
+<h2>Education</h2>
+
+<h3>Bachelor of Computer Engineering</h3> 
+
+<p>
+
+Centro Universitario de Ciencias Exactas e Ingeniería (CUCEI)
+
+<br>
+
+</p><p class="a"> 2014 - present
+
+</p>
+
+<hr class="divide2">
+
+<h3>Diploma in comprehensive video game design</h3> 
+
+<p>
+
+Centro Universitario de los Valles (CUVALLES)
+
+<br>
+
+</p><p class="a">2019
+
+</p>
+
+<hr class="divide2">
+
+<h3>Proof of participation in the 3D modeling and texturing course in Blender</h3> 
+
+<p>
+
+Instituto Universitario AMERIKE
+
+<br>
+
+</p><p class="a">2020
+
+</p>
+
+<hr class="divide1">
+
+<div class="pro">
+
+<h2>Professional experience</h2>
+
+<h3>Global Game Jam</h3> 
+
+<p class="a">2016, 2017, 2018, 2019, 2020, 2021
+
+</p><p>
+
+-Programming: software development in a graphics engine. 
+
+<br>
+<br>
+
+-2D art: settings, characters and everything related to the art of the game. 
+
+<br>
+<br>
+
+-Animation: creation of 2D animations in a graphic editor. 
+
+<br>
+<br>
+
+-Game design: storyboard, planning of the game concept, level design and enemies.
+
+</p>
+
+<hr class="divide2">
+
+<h3>Preschool teacher</h3> 
+
+<p class="a">2017-2020
+
+</p><p>
+
+-English classes for 1st, 2nd and 3rd kindergarten students. 
+
+<br>
+<br>
+
+-Computer workshop
+
+</p><hr class="divide2">
+
+<h3>QA Tester in Amber Studio</h3> 
+
+<p class="a">2020 - present
+
+</p>
+
+</div>
+
+<hr class="divide1">
+
+
+<h2>Computing</h2>
+
+<p>C .................................<progress value="70" max="100">
+
+</progress></p><p>C++ .............................<progress value="75" max="100">
+
+</progress></p><p>C# ...............................<progress value="80" max="100">
+
+</progress></p><p> HTML ..........................<progress value="20" max="100">
+
+</progress></p><p>Office ..........................<progress value="90" max="100">
+
+</progress></p><p>Gimp ...........................<progress value="80" max="100">
+
+</progress></p><p>Corel Draw ..................<progress value="95" max="100">
+
+</progress></p><p>Maya ...........................<progress value="70" max="100">
+
+</progress></p><p>Blender .......................<progress value="85" max="100">
+
+</progress></p><p>Zbrush .........................<progress value="50" max="100">
+
+
+
+</progress></p></div>
+
+<div style="clear: both"></div>
+
+<div style="text-align: right;position: fixed;z-index:9999999;bottom: 0;width: auto;right: 1%;cursor: pointer;line-height: 0;display:block !important;"><a title="Hosted on free web hosting 000webhost.com. Host your own website for FREE." target="_blank" href="https://www.000webhost.com/?utm_source=000webhostapp&amp;utm_campaign=000_logo&amp;utm_medium=website&amp;utm_content=footer_img"><img src="Curriculum%20Vitae%20Archivos/footer-powered-by-000webhost-white2.webp" alt="www.000webhost.com"></a></div><script>function getCookie(t){for(var e=t+"=",n=decodeURIComponent(document.cookie).split(";"),o=0;o<n.length;o++){for(var i=n[o];" "==i.charAt(0);)i=i.substring(1);if(0==i.indexOf(e))return i.substring(e.length,i.length)}return""}getCookie("hostinger")&&(document.cookie="hostinger=;expires=Thu, 01 Jan 1970 00:00:01 GMT;",location.reload());var wordpressAdminBody=document.getElementsByClassName("wp-admin")[0],notification=document.getElementsByClassName("notice notice-success is-dismissible"),hostingerLogo=document.getElementsByClassName("hlogo"),mainContent=document.getElementsByClassName("notice_content")[0];if(null!=wordpressAdminBody&&notification.length>0&&null!=mainContent){var googleFont=document.createElement("link");googleFontHref=document.createAttribute("href"),googleFontRel=document.createAttribute("rel"),googleFontHref.value="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700",googleFontRel.value="stylesheet",googleFont.setAttributeNode(googleFontHref),googleFont.setAttributeNode(googleFontRel);var css="@media only screen and (max-width: 576px) {#main_content {max-width: 320px !important;} #main_content h1 {font-size: 30px !important;} #main_content h2 {font-size: 40px !important; margin: 20px 0 !important;} #main_content p {font-size: 14px !important;} #main_content .content-wrapper {text-align: center !important;}} @media only screen and (max-width: 781px) {#main_content {margin: auto; justify-content: center; max-width: 445px;}} @media only screen and (max-width: 1325px) {.web-hosting-90-off-image-wrapper {position: absolute; max-width: 95% !important;} .notice_content {justify-content: center;} .web-hosting-90-off-image {opacity: 0.3;}} @media only screen and (min-width: 769px) {.notice_content {justify-content: space-between;} #main_content {margin-left: 5%; max-width: 445px;} .web-hosting-90-off-image-wrapper {position: absolute; display: flex; justify-content: center; width: 100%; }} .web-hosting-90-off-image {max-width: 90%;} .content-wrapper {min-height: 454px; display: flex; flex-direction: column; justify-content: center; z-index: 5} .notice_content {display: flex; align-items: center;} * {-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;} .upgrade_button_red_sale{box-shadow: 0 2px 4px 0 rgba(255, 69, 70, 0.2); max-width: 350px; border: 0; border-radius: 3px; background-color: #ff4546 !important; padding: 15px 55px !important; font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 600; color: #ffffff;} .upgrade_button_red_sale:hover{color: #ffffff !important; background: #d10303 !important;}",style=document.createElement("style"),sheet=window.document.styleSheets[0];style.styleSheet?style.styleSheet.cssText=css:style.appendChild(document.createTextNode(css)),document.getElementsByTagName("head")[0].appendChild(style),document.getElementsByTagName("head")[0].appendChild(googleFont);var button=document.getElementsByClassName("upgrade_button_red")[0],link=button.parentElement;link.setAttribute("href","https://www.hostinger.com/hosting-starter-offer?utm_source=000webhost&utm_medium=panel&utm_campaign=000-wp"),link.innerHTML='<button class="upgrade_button_red_sale">Go for it</button>',(notification=notification[0]).setAttribute("style","padding-bottom: 0; padding-top: 5px; background-color: #040713; background-size: cover; background-repeat: no-repeat; color: #ffffff; border-left-color: #040713;"),notification.className="notice notice-error is-dismissible";var mainContentHolder=document.getElementById("main_content");mainContentHolder.setAttribute("style","padding: 0;"),hostingerLogo[0].remove();var h1Tag=notification.getElementsByTagName("H1")[0];h1Tag.className="000-h1",h1Tag.innerHTML="Black Friday Prices",h1Tag.setAttribute("style",'color: white; font-family: "Roboto", sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase;');var h2Tag=document.createElement("H2");h2Tag.innerHTML="Get 90% Off!",h2Tag.setAttribute("style",'color: white; margin: 10px 0 15px 0; font-family: "Roboto", sans-serif; font-size: 60px; font-weight: 700; line-height: 1;'),h1Tag.parentNode.insertBefore(h2Tag,h1Tag.nextSibling);var paragraph=notification.getElementsByTagName("p")[0];paragraph.innerHTML="Get Web Hosting for $0.99/month + SSL Certificate for FREE!",paragraph.setAttribute("style",'font-family: "Roboto", sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 15px;');var list=notification.getElementsByTagName("UL")[0];list.remove();var org_html=mainContent.innerHTML,new_html='<div class="content-wrapper">'+mainContent.innerHTML+'</div><div class="web-hosting-90-off-image-wrapper"><img class="web-hosting-90-off-image" src="https://cdn.000webhost.com/000webhost/promotions/bf-2020-wp-inject-img.png"></div>';mainContent.innerHTML=new_html;var saleImage=mainContent.getElementsByClassName("web-hosting-90-off-image")[0]}</script>
+<div>
+    <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+      <!-- Modal content -->
+      <div class="twoseven-ext-tab-media-modal-content">
+        <div class="iframe-container" style="height: 100%; width: 100%;">
+          <span class="close">×</span>
+        </div>
+      </div>
+    </div></div></body></html>
